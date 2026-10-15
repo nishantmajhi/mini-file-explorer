@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      # The recycle-bin logic only; it needs the Shell COM libraries and not
+      # wxWidgets.
+      - run: |
+          g++ -std=c++17 -o tests/recyclebin_test.exe tests/recyclebin_test.cpp src/RecycleBin.cpp -lole32 -lshell32 -luuid
+          ./tests/recyclebin_test.exe

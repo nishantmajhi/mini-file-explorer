@@ -1,0 +1,11 @@
+# Build output
+build/
+*.exe
+*.o
+*.obj
+
+# Editor and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
